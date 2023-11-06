@@ -2,7 +2,7 @@ import tkinter as tk
 
 def show_welcome_page():
     def start_game():
-        root.destroy()
+        root.quit()
         return True
 
     root = tk.Tk()
@@ -22,7 +22,7 @@ def show_welcome_page():
 
 
     root.mainloop()
+    root.destroy()
     return True
 
-if __name__ == "__main__":
-    show_welcome_page()
+

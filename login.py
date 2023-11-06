@@ -131,4 +131,3 @@ def login_register_page():
     root.mainloop()
     root.destroy()
     return account
-
