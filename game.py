@@ -325,6 +325,25 @@ def game(user_choice, username):
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     return
 
+    def display_timer(screen, time_remaining):
+        font_size = min(WIDTH, HEIGHT) // 20
+        font = pygame.font.SysFont(None, font_size)
+        timer_text = "{:02d}:{:02d}".format(time_remaining // 60, time_remaining % 60)
+        timer_surface = font.render(timer_text, True, (0, 0, 0))
+        timer_rect = timer_surface.get_rect(topright=(WIDTH - 10, 10))
+
+        # Clear the old timer text
+        clear_rect = pygame.Rect(0.85 * WIDTH, 2, 0.15 * WIDTH, font_size)  # Adjust as needed
+        pygame.draw.rect(screen, WHITE, clear_rect)
+
+        screen.blit(timer_surface, timer_rect)
+        pygame.display.update(clear_rect)  # Update the entire timer area
+
+    time_limits = {
+        'Easy': 60,  # 1 minute
+        'Medium': 180,  # 3 minutes
+        'Hard': 300  # 5 minutes
+    }
     def main():
         while True:
             grid = [[Cell(row, col) for col in range(COLS)] for row in range(ROWS)]
@@ -351,12 +370,46 @@ def game(user_choice, username):
             end_pos = (WIDTH - CELL_SIZE, HEIGHT - CELL_SIZE)
 
             start_time = time.time()
-
+            time_limit = time_limits[difficulty]
             # Draw the maze with all players at the start
             draw_maze(grid, mst, players)
 
             running = True
             while running:
+                current_time = time.time()
+                elapsed_time = current_time - start_time
+                time_remaining = max(time_limit - elapsed_time, 0)
+                if time_remaining <= 0:
+                    # 4. Handle Time Running Out
+                    print("Time's Up!")
+                    display_message(screen, 'Time\'s Up! You Lost.')
+                    wait_for_click()  # Waiting for user click to proceed
+                    display_message(screen, 'Return to Home? (Y/N)')
+
+                    waiting_for_decision = True
+                    while waiting_for_decision:
+                        for evt in pygame.event.get():
+                            if evt.type == pygame.KEYDOWN:
+                                if evt.key == pygame.K_y:
+                                    pygame.quit()
+                                    return True
+                                if evt.key in [pygame.K_n, pygame.K_ESCAPE]:
+                                    running = False
+                                    waiting_for_decision = False
+
+                    display_message(screen, 'Play again? (Y/N)')
+
+                    waiting_for_decision = True
+                    while waiting_for_decision:
+                        for evt in pygame.event.get():
+                            if evt.type == pygame.KEYDOWN:
+                                if evt.key == pygame.K_y:
+                                    running = False
+                                    waiting_for_decision = False
+                                if evt.key in [pygame.K_n, pygame.K_ESCAPE]:
+                                    pygame.quit()
+                                    return False
+
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
                         running = False
@@ -375,6 +428,7 @@ def game(user_choice, username):
 
                     draw_players(screen, players, old_positions, mst)
 
+                display_timer(screen, int(time_remaining))
                 # Check for winning condition
                 for i, player in enumerate(players):
                     if player.x == end_pos[0] and player.y == end_pos[1]:
