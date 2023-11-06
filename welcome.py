@@ -3,7 +3,6 @@ import tkinter as tk
 def show_welcome_page():
     def start_game():
         root.quit()
-        return True
 
     root = tk.Tk()
     root.title("Maze Adventure")
@@ -23,6 +22,6 @@ def show_welcome_page():
 
     root.mainloop()
     root.destroy()
-    return True
+    return
 
 

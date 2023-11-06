@@ -1,14 +1,53 @@
 import game
 import login
-import home
+import settings
 import welcome
+import home
+
+class WindowController:
+    def __init__(self):
+        self.username = None
+        self.settings = None
+        self.windows = {
+            'welcome': welcome.show_welcome_page,
+            'login': login.login_register_page,
+            'home': home.home,
+            'settings': settings.home,
+            'game': lambda: game.game(self.settings, self.username)
+        }
+
+    def show_window(self, name):
+        if name == "login":
+            self.username = self.windows[name]()
+            return self.show_window('home')
+
+        elif name == "welcome":
+            self.windows[name]()
+            return self.show_window('login')
+
+        elif name == "settings":
+            self.settings = self.windows[name]()
+
+        elif name == "home":
+            choice = self.windows[name]()
+            if choice == "setup":
+                return self.show_window('settings')
+            elif choice == "local":
+                pass
+            elif choice == "global":
+                pass
+            elif choice == "log out":
+                self.username = None
+                self.settings = None
+                return self.show_window('login')
+
+        elif name == "game":
+            return_home = self.windows[name]()
+            if return_home:
+                self.show_window('welcome')
+        else:
+            self.windows[name]()
 
 
-play = welcome.show_welcome_page()
-if play:
-    login.init_db()
-username = login.login_register_page()
-active = True
-while username and active:
-    user_choice = home.home()
-    active = game.game(user_choice, username)
+
+x = WindowController().show_window('welcome')
