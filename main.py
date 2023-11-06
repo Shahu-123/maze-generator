@@ -27,6 +27,7 @@ class WindowController:
 
         elif name == "settings":
             self.settings = self.windows[name]()
+            return self.show_window("game")
 
         elif name == "home":
             choice = self.windows[name]()
@@ -44,10 +45,12 @@ class WindowController:
         elif name == "game":
             return_home = self.windows[name]()
             if return_home:
-                self.show_window('welcome')
+                return self.show_window('home')
+            else:
+                return self.show_window('welcome')
         else:
-            self.windows[name]()
+            return self.windows[name]()
 
 
-
-x = WindowController().show_window('welcome')
+x = WindowController()
+x.show_window('login')

@@ -387,7 +387,6 @@ def game(user_choice, username):
                         # Add function to inform the user if the local or global high score has been beaten
                         local_scores = get_local_high_scores(username, difficulty)
                         global_scores = get_global_high_scores(difficulty)
-                        print(local_scores)
                         if elapsed_time == global_scores[0][1]:
                             display_message(screen, f"Global high score beaten by {player_name}!")
                             wait_for_click()  # Waiting for user click to proceed
