@@ -1,11 +1,9 @@
 import tkinter as tk
 
-
-def start_game():
-    root.quit()
-
 def show_welcome_page():
-    global root
+    def start_game():
+        root.quit()
+
     root = tk.Tk()
     root.title("Maze Adventure")
 
@@ -18,7 +16,7 @@ def show_welcome_page():
     background_label.place(relwidth=1, relheight=1)
 
     # Play Button
-    play_button = tk.Button(root, width=15 ,height=2, text="Play", font=("Arial", 20), command=start_game)
+    play_button = tk.Button(root, width=15, height=2, text="Play", font=("Arial", 20), command=start_game)
     play_button.place(relx=0.525, rely=0.62, anchor="center")
     root.mainloop()
     root.destroy()
