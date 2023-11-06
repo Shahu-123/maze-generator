@@ -487,4 +487,5 @@ def game(user_choice, username):
 
 if __name__ == "__main__":
     choice = {'difficulty': 'Easy', 'num_players': 3, 'players': [{'name': 'Shahu', 'color': 'Red'}, {'name': 'Sam', 'color': 'Green'}, {'name': 'John', 'color': 'Blue'}]}
-    game(choice, 'test')
+    result = game(choice, 'test')
+    print(result)
