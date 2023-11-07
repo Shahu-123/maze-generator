@@ -7,7 +7,7 @@ def get_local_high_scores(account, difficulty):
 
     query = '''SELECT name, MIN(score) as min_score
                FROM scores 
-               WHERE account = ? and difficulty = ?
+               WHERE username = ? and difficulty = ?
                GROUP BY name
                ORDER BY min_score;'''
 

@@ -288,7 +288,7 @@ def game(user_choice, username):
 
         query = '''SELECT name, MIN(score) as min_score
                    FROM scores 
-                   WHERE account = ? and difficulty = ?
+                   WHERE username = ? and difficulty = ?
                    GROUP BY name
                    ORDER BY min_score
                    LIMIT 10;'''

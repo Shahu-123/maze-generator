@@ -2,18 +2,6 @@ import sqlite3
 import tkinter as tk
 from tkinter import messagebox
 
-def init_db():
-    conn = sqlite3.connect('users.db')
-    cursor = conn.cursor()
-    cursor.execute('''
-    CREATE TABLE IF NOT EXISTS users (
-        username TEXT PRIMARY KEY,
-        password TEXT NOT NULL
-    )
-    ''')
-    conn.commit()
-    conn.close()
-
 def register_user(username, password):
     conn = sqlite3.connect('users.db')
     cursor = conn.cursor()
