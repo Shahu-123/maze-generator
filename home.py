@@ -1,6 +1,25 @@
 import tkinter as tk
+from tkinter import ttk
 
 
+def create_dropdown(root, choices):
+    # Create a Tkinter variable for holding the selected option
+    selected_option = tk.StringVar()
+
+    # Create the dropdown menu
+    dropdown = ttk.Combobox(root, textvariable=selected_option)
+
+    # Set the options for the dropdown
+    dropdown['values'] = choices
+
+    # Set the default value for the dropdown (first option in the list)
+    dropdown.current(0)
+
+    # Position the dropdown using pack (you can also use grid or place)
+    dropdown.pack()
+
+    # Return the selected option variable and the dropdown object
+    return selected_option, dropdown
 def home():
     def on_click(value):
         result.set(value)
@@ -27,6 +46,22 @@ def home():
     local_leaderboard_button = tk.Button(root, text="Local Leaderboard", command=lambda: on_click("local"))
     local_leaderboard_button.place(x=50, y=100, width=200, height=50)
 
+    level_label = tk.Label(root, text="Leaderboard Level:", bg='#ADD8E6', fg='black', font=("Arial", 15))
+    level_label.place(x=50, y=65, width=130, height=30)
+
+    # Define the options for the dropdown
+    options = ['Easy', 'Medium', 'Hard']
+    # Create the dropdown by calling the function
+    selected_option_var, my_dropdown = create_dropdown(root, options)
+    # Function to handle selection change
+    selection = selected_option_var.get()
+    def on_select(event):
+        nonlocal selection
+        selection = selected_option_var.get()
+    # Bind the selection event to the dropdown
+    my_dropdown.bind('<<ComboboxSelected>>', on_select)
+    my_dropdown.place(x=200, y=65, width=75, height=30)
+
     global_leaderboard_button = tk.Button(root, text="Global Leaderboard", command=lambda: on_click("global"))
     global_leaderboard_button.place(x=50, y=200, width=200, height=50)
 
@@ -40,7 +75,7 @@ def home():
     root.mainloop()
 
     # After the window is destroyed, return the result
-    return result.get()
+    return result.get() + selection
 
 
 if __name__ == "__main__":
