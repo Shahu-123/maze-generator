@@ -276,7 +276,7 @@ def game(user_choice, username):
         cursor = conn.cursor()
 
         # Insert the player's score into the all_scores table
-        query = 'INSERT INTO scores (account, name, score, difficulty) VALUES (?, ?, ?, ?);'
+        query = 'INSERT INTO scores (username, name, score, difficulty) VALUES (?, ?, ?, ?);'
 
         cursor.execute(query, (account, player_name, score, difficulty))
         conn.commit()  # Save the changes
