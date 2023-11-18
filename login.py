@@ -25,8 +25,7 @@ def check_login(username, password):
     return False
 
 def login_register_page():
-    account = False
-
+    account = None
     def on_login():
         nonlocal account
         username = entry_username.get()

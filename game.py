@@ -151,7 +151,7 @@ def game(user_choice, username):
 
         return forest
 
-    def draw_maze(grid, mst, player):
+    def draw_maze(grid, mst):
         screen.fill(WHITE)
 
         for row in grid:
@@ -212,10 +212,7 @@ def game(user_choice, username):
         pygame.display.update((x, y, CELL_SIZE, CELL_SIZE))
 
     def display_message(screen, player_scores, score_type=None):
-        # Headings
-        headings = ["Ranking", "Player", "Score"]
-
-        # Compute font size as a fraction (e.g., 1/20th) of the smaller maze dimension
+        # Compute font size as a fraction of the smaller maze dimension
         font_size = min(WIDTH, HEIGHT) // 20
         font = pygame.font.SysFont(None, font_size)
 
@@ -372,7 +369,7 @@ def game(user_choice, username):
             start_time = time.time()
             time_limit = time_limits[difficulty]
             # Draw the maze with all players at the start
-            draw_maze(grid, mst, players)
+            draw_maze(grid, mst)
 
             running = True
             while running:
@@ -441,7 +438,7 @@ def game(user_choice, username):
                         # Add function to inform the user if the local or global high score has been beaten
                         local_scores = get_local_high_scores(username, difficulty)
                         global_scores = get_global_high_scores(difficulty)
-                        print(local_scores)
+
                         if elapsed_time == global_scores[0][1]:
                             display_message(screen, f"Global high score beaten by {player_name}!")
                             wait_for_click()  # Waiting for user click to proceed

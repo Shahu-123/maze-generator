@@ -64,4 +64,4 @@ class WindowController:
 
 
 x = WindowController()
-x.show_window('login')
+x.show_window('welcome')
