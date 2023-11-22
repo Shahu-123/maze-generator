@@ -109,7 +109,7 @@ def login_register_page():
                                        command=toggle_password)
     chk_show_password.pack(anchor="w", padx=10, pady=5)
 
-    btn_login = tk.Button(frame, text="Login", bg="green", fg="black", command=on_login)
+    btn_login = tk.Button(frame, text="Login", bg="blue", fg="black", command=on_login)
     btn_login.pack(padx=100, pady=20, fill="x")
 
     btn_register = tk.Button(frame, text="Register", bg="blue", fg="black", command=on_register)
