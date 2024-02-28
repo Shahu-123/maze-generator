@@ -11,7 +11,7 @@ def home():
         difficulty = difficulty_combo.get()
         num_players = int(num_players_combo.get())
 
-        # Check if the difficulty is blank
+        # Check if difficulty is blank
         if not difficulty:
             tk.messagebox.showerror("Error", "Please select a difficulty!")
             return
@@ -21,7 +21,7 @@ def home():
             color = color_combos[i].get()
             name = name_entries[i].get() or f"Player {i + 1}"  # Default to Player i if name is blank
 
-            # Check if the color for the player is blank
+            # Check if color for the player is blank
             if not color:
                 tk.messagebox.showerror("Error", f"Please select a color for {name}!")
                 return
@@ -33,9 +33,9 @@ def home():
         return
 
 
-    # Define default control sets
+    # Default control sets
     default_controls = [
-        ['↑', '↓', '←', '→'],  # Arrow keys for Player 1 (using arrow symbols for visual clarity)
+        ['↑', '↓', '←', '→'],  # Arrow keys for Player 1
         ['W', 'S', 'A', 'D'],  # WASD for Player 2
         ['I', 'K', 'J', 'L']  # IJKL for Player 3
     ]
@@ -53,7 +53,7 @@ def home():
     difficulties = ["Easy", "Medium", "Hard"]
     difficulty_combo = ttk.Combobox(frame, values=difficulties, state="readonly")
     difficulty_combo.grid(row=0, column=1, pady=5, padx=5)
-    difficulty_combo.set("Easy")  # Set "Easy" as the default value
+    difficulty_combo.set("Easy")
 
     # Player Details
     directions = ["Up", "Down", "Left", "Right"]
@@ -71,21 +71,21 @@ def home():
     def update_player_options(event):
         selected = int(num_players_combo.get())
 
-        # Display the direction labels only once above all control labels
+        # Display direction labels only once above all control labels
         for idx, direction_label in enumerate(direction_labels):
             direction_label.grid(row=3, column=3 + idx, padx=5)
 
         for i in range(3):
             if i < selected:
                 player_labels[i].grid(row=2 * i + 4, column=0, pady=5, sticky="w")
-                name_entries[i].grid(row=2 * i + 4, column=1, pady=5, padx=5)  # Grid the name entry
-                color_combos[i].grid(row=2 * i + 4, column=2, pady=5, padx=5)  # Move the color combo to the next column
+                name_entries[i].grid(row=2 * i + 4, column=1, pady=5, padx=5)
+                color_combos[i].grid(row=2 * i + 4, column=2, pady=5, padx=5)
                 for j in range(4):
                     control_labels[i][j].config(text=default_controls[i][j])
-                    control_labels[i][j].grid(row=2 * i + 4, column=3 + j, padx=5)  # Adjust the column
+                    control_labels[i][j].grid(row=2 * i + 4, column=3 + j, padx=5)
             else:
                 player_labels[i].grid_forget()
-                name_entries[i].grid_forget()  # Forget the name entry
+                name_entries[i].grid_forget()
                 color_combos[i].grid_forget()
                 for j in range(4):
                     control_labels[i][j].grid_forget()
@@ -102,7 +102,7 @@ def home():
     play_button = ttk.Button(frame, text="Play!", command=play)
     play_button.grid(row=0, column=5, pady=5, padx=5, sticky='e')
 
-    update_player_options(None)  # Call this once to set initial player details based on combobox value
+    update_player_options(None)
 
     root.mainloop()
     root.destroy()

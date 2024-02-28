@@ -39,26 +39,21 @@ def show_local_scores(account, difficulty):
         root.destroy()
         return True
 
-    # Fetch the global high scores
     local_scores = get_local_high_scores(account, difficulty)
 
     # Create the main window
     root = tk.Tk()
     root.title("High Scores")
-    root.configure(bg='light blue')  # Set background color of the root window
+    root.configure(bg='light blue')
 
-    # Create a frame for global scores with a light blue background
     local_frame = tk.Frame(root, padx=20, pady=20, bg='light blue')
     local_frame.pack(side="top", fill="both", expand=True)
 
-    # Add titles for the score sections with a larger font
     title = tk.Label(local_frame, text="Local High Scores", font=("Arial", 20, 'bold'), bg='light blue', fg="black")
-    title.pack(side="top", pady=(0, 10))  # Add some padding below the title
+    title.pack(side="top", pady=(0, 10))
 
-    # Use a monospaced font for scores to align them nicely
     score_font = ("Courier", 15)
 
-    # Create a canvas for scrolling
     canvas = tk.Canvas(local_frame, bg='light blue', highlightthickness=0)
     scrollbar = tk.Scrollbar(local_frame, orient="vertical", command=canvas.yview)
     scrollable_frame = tk.Frame(canvas, bg='light blue')
@@ -81,14 +76,11 @@ def show_local_scores(account, difficulty):
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
 
-    # Button for returning, with some padding for visual appeal
     btn_return = tk.Button(local_frame, text="Return", command=return_to_home, bg='light blue', fg='black')
     btn_return.pack(side="bottom", fill='x', padx=20, pady=(10, 0))
 
-    # Set the minimum size of the window to prevent squishing
     root.minsize(300, 400)
 
-    # Start the Tkinter event loop
     root.mainloop()
 
 def show_global_scores(difficulty):
@@ -99,23 +91,18 @@ def show_global_scores(difficulty):
     # Fetch the global high scores
     global_scores = get_global_high_scores(difficulty)
 
-    # Create the main window
     root = tk.Tk()
     root.title("High Scores")
-    root.configure(bg='light blue')  # Set background color of the root window
+    root.configure(bg='light blue')
 
-    # Create a frame for global scores with a light blue background
     global_frame = tk.Frame(root, padx=20, pady=20, bg='light blue')
     global_frame.pack(side="top", fill="both", expand=True)
 
-    # Add titles for the score sections with a larger font
     title = tk.Label(global_frame, text="Global High Scores", font=("Arial", 20, 'bold'), bg='light blue', fg="black")
-    title.pack(side="top", pady=(0, 10))  # Add some padding below the title
+    title.pack(side="top", pady=(0, 10))
 
-    # Use a monospaced font for scores to align them nicely
     score_font = ("Courier", 15)
 
-    # Create a canvas for scrolling
     canvas = tk.Canvas(global_frame, bg='light blue', highlightthickness=0)
     scrollbar = tk.Scrollbar(global_frame, orient="vertical", command=canvas.yview)
     scrollable_frame = tk.Frame(canvas, bg='light blue')
@@ -138,14 +125,11 @@ def show_global_scores(difficulty):
     canvas.pack(side="left", fill="both", expand=True)
     scrollbar.pack(side="right", fill="y")
 
-    # Button for returning, with some padding for visual appeal
     btn_return = tk.Button(global_frame, text="Return", command=return_to_home, bg='light blue', fg='black')
     btn_return.pack(side="bottom", fill='x', padx=20, pady=(10, 0))
 
-    # Set the minimum size of the window to prevent squishing
     root.minsize(300, 400)
 
-    # Start the Tkinter event loop
     root.mainloop()
 
 if __name__ == "__main__":

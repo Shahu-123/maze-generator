@@ -100,11 +100,10 @@ def login_register_page():
     entry_password = tk.Entry(frame, show="*")
     entry_password.pack(padx=10, pady=20, fill="x")
 
-    # Add a variable to hold the state of the checkbox
+    # Variable to hold the state of the checkbox
     show_password_var = tk.BooleanVar()
     show_password_var.set(False)
 
-    # Create and place the checkbox for password peek feature
     chk_show_password = tk.Checkbutton(frame, text="Show Password", bg="lightblue", variable=show_password_var,
                                        command=toggle_password)
     chk_show_password.pack(anchor="w", padx=10, pady=5)
